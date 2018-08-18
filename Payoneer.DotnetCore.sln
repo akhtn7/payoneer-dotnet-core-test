@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.WebApi.Internal", "src\Payoneer.DotnetCore.WebApi.Internal\Payoneer.DotnetCore.WebApi.Internal.csproj", "{F77846F0-2CF9-4E8F-A9C5-9C27C7571CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.WebApi.External", "Payoneer.DotnetCore.WebApi.External\Payoneer.DotnetCore.WebApi.External.csproj", "{85E41A73-1F53-4911-87F0-000C156346EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.WebApi.External", "src\Payoneer.DotnetCore.WebApi.External\Payoneer.DotnetCore.WebApi.External.csproj", "{85E41A73-1F53-4911-87F0-000C156346EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
