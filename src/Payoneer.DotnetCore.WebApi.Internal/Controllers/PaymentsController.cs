@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Payoneer.DotnetCore.Domain;
-using Payoneer.DotnetCore.Service;
+using Payoneer.DotnetCore.Service.Internal;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Payoneer.DotnetCore.WebApi.External.Controllers
+namespace Payoneer.DotnetCore.WebApi.Internal.Controllers
 {
     [Route("api/[controller]")]
     public class PaymentsController : Controller
     {
-        private readonly IPaymentService _paymentService;
+        private readonly IPaymentServiceInternal _paymentServiceInternal;
 
-        public PaymentsController(IPaymentService paymentService) =>
-            _paymentService = paymentService ?? throw new ArgumentNullException(nameof(paymentService));
+        public PaymentsController(IPaymentServiceInternal paymentServiceInternal) =>
+            _paymentServiceInternal = paymentServiceInternal ?? throw new ArgumentNullException(nameof(paymentServiceInternal));
 
         // GET api/payments?paymentStatus=0&paymentStatus=2
         [HttpGet]
@@ -22,7 +21,7 @@ namespace Payoneer.DotnetCore.WebApi.External.Controllers
         {
             if (paymentStatus == null) return BadRequest();
 
-            var payments = await _paymentService.GetPaymentsFiltered(paymentStatus);
+            var payments = await _paymentServiceInternal.GetPaymentsFiltered(paymentStatus);
             return Ok(payments);
         }
 
@@ -32,7 +31,7 @@ namespace Payoneer.DotnetCore.WebApi.External.Controllers
         {
             if (id <= 0) return BadRequest();
 
-            var payment = await _paymentService.GetPaymentByIdAsync(id);
+            var payment = await _paymentServiceInternal.GetPaymentByIdAsync(id);
 
             if (payment == null) return NotFound();
 
@@ -45,7 +44,7 @@ namespace Payoneer.DotnetCore.WebApi.External.Controllers
         {
             if (request == null) return BadRequest();
 
-            await _paymentService.UpdatePaymentStatusAsync(request);
+            await _paymentServiceInternal.UpdatePaymentStatusAsync(request);
             return Ok();
         }
     }

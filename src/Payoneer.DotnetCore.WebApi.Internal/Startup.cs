@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using Payoneer.DotnetCore.Net.Rest;
+using Payoneer.DotnetCore.Service.Internal;
 
 namespace Payoneer.DotnetCore.WebApi.Internal
 {
@@ -21,6 +23,12 @@ namespace Payoneer.DotnetCore.WebApi.Internal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureOptions(Configuration);
+
+            services.AddTransient<IPaymentServiceInternal, PaymentServiceInternal>();
+            services.AddTransient<IRestClient, RestClient>();
+
+            services.AddHttpClient();
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options =>

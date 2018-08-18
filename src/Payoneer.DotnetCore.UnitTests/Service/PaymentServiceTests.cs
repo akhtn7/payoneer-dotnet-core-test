@@ -65,29 +65,55 @@ namespace Payoneer.DotnetCore.UnitTests.Service
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
-        [Theory]
-        [MemberData(nameof(MocksForGetPaymentsFiltered))]
-        public async Task PaymentService_GetPaymentsFiltered_should_filter_Payments(
-            IList<PaymentStatus> filter)
+        //[Theory]
+        //[MemberData(nameof(MocksForGetPaymentsFiltered))]
+        //public async Task PaymentService_GetPaymentsFiltered_should_filter_Payments(
+        //    IList<PaymentStatus> filter)
+        //{
+        //    //Arrange
+        //    var builder = SubjectBuilder.New();
+        //    var subject = builder.Build();
+
+        //    var x = builder.Payments
+        //        .Where(p => filter.Contains(p.Status))
+        //        .OrderBy(p => p.Id);
+
+        //    //Act
+        //    var result = (await subject.GetPaymentsFiltered(filter)).OrderBy(p => p.Id).ToList();
+
+        //    //Assert
+        //    builder.Payments
+        //        .Where(p => filter.Contains(p.Status))
+        //        .OrderBy(p => p.Id)
+        //        .SequenceEqual(result)
+        //        .Should()
+        //        .BeTrue();
+        //}
+
+        [Fact]
+        public void PaymentService_GetPaymentByIdAsync_should_throw_if_argument_is_invalid()
         {
             //Arrange
-            var builder = SubjectBuilder.New();
-            var subject = builder.Build();
-
-            var x = builder.Payments
-                .Where(p => filter.Contains(p.Status))
-                .OrderBy(p => p.Id);
+            var subject = SubjectBuilder.New().Build();
 
             //Act
-            var result = (await subject.GetPaymentsFiltered(filter)).OrderBy(p => p.Id).ToList();
+            Func<Task> func = async () => await subject.GetPaymentByIdAsync(0);
 
             //Assert
-            builder.Payments
-                .Where(p => filter.Contains(p.Status))
-                .OrderBy(p => p.Id)
-                .SequenceEqual(result)
-                .Should()
-                .BeTrue();
+            func.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void PaymentService_UpdatePaymentStatusAsync_should_throw_if_argument_is_null()
+        {
+            //Arrange
+            var subject = SubjectBuilder.New().Build();
+
+            //Act
+            Func<Task> func = async () => await subject.UpdatePaymentStatusAsync(null);
+
+            //Assert
+            func.Should().Throw<ArgumentNullException>();
         }
 
         public static IEnumerable<object[]> IncompleteMocksForCtor => new[]

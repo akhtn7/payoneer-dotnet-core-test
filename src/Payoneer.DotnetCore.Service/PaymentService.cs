@@ -32,7 +32,7 @@ namespace Payoneer.DotnetCore.Service
 
         public async Task<Payment> GetPaymentByIdAsync(int id)
         {
-            if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
+            if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
 
             return await _paymentRepository.GetAll().FirstOrDefaultAsync(p => p.Id == id);
         }

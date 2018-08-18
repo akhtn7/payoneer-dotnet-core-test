@@ -58,9 +58,11 @@ namespace Payoneer.DotnetCore.WebApi.External
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5001"));
+                builder.WithOrigins("http://localhost:5000"));
 
             app.UseMvc();
+
+            app.ApplicationServices.CreateScope().ServiceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
         }
     }
 }
