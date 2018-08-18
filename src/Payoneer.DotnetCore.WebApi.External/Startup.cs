@@ -7,7 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.IO.Compression;
 using Microsoft.EntityFrameworkCore;
+using Payoneer.DotnetCore.Domain;
 using Payoneer.DotnetCore.Rds;
+using Payoneer.DotnetCore.Repository;
+using Payoneer.DotnetCore.Service;
 
 namespace Payoneer.DotnetCore.WebApi.External
 {
@@ -32,6 +35,11 @@ namespace Payoneer.DotnetCore.WebApi.External
                 {
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; ;
                 });
+
+            services.AddScoped<IDbFactory, DbFactory>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IRepository<Payment>, Repository<Payment>>();
+            services.AddTransient<IPaymentService, PaymentService>();
 
             services.AddCors();
 
