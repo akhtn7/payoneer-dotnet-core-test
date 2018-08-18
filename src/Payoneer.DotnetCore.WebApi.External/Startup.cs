@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using Microsoft.EntityFrameworkCore;
+using Payoneer.DotnetCore.Rds;
 
 namespace Payoneer.DotnetCore.WebApi.External
 {
@@ -21,6 +23,9 @@ namespace Payoneer.DotnetCore.WebApi.External
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("ApplicationContext");
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options =>
