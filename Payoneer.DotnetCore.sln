@@ -3,9 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.WebApi.Internal", "src\Payoneer.DotnetCore.WebApi.Internal\Payoneer.DotnetCore.WebApi.Internal.csproj", "{F77846F0-2CF9-4E8F-A9C5-9C27C7571CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payoneer.DotnetCore.WebApi.Internal", "src\Payoneer.DotnetCore.WebApi.Internal\Payoneer.DotnetCore.WebApi.Internal.csproj", "{F77846F0-2CF9-4E8F-A9C5-9C27C7571CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.WebApi.External", "src\Payoneer.DotnetCore.WebApi.External\Payoneer.DotnetCore.WebApi.External.csproj", "{85E41A73-1F53-4911-87F0-000C156346EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payoneer.DotnetCore.WebApi.External", "src\Payoneer.DotnetCore.WebApi.External\Payoneer.DotnetCore.WebApi.External.csproj", "{85E41A73-1F53-4911-87F0-000C156346EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.Domain", "src\Payoneer.DotnetCore.Domain\Payoneer.DotnetCore.Domain.csproj", "{07AD696A-A556-4E8E-A07F-248A5B3F40D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.Rds", "src\Payoneer.DotnetCore.Rds\Payoneer.DotnetCore.Rds.csproj", "{096774CD-99B2-489B-B6CA-D07A8271154E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.Repository", "src\Payoneer.DotnetCore.Repository\Payoneer.DotnetCore.Repository.csproj", "{9C3AF107-6A8D-47F1-BFA0-D15CDCD16865}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.Service", "src\Payoneer.DotnetCore.Service\Payoneer.DotnetCore.Service.csproj", "{6D064064-AAD9-4553-A94E-77963C938988}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.Net.Rest", "src\Payoneer.DotnetCore.Net.Rest\Payoneer.DotnetCore.Net.Rest.csproj", "{00C9171D-5472-447B-87B8-B5083FD9C466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payoneer.DotnetCore.UnitTests", "src\Payoneer.DotnetCore.UnitTests\Payoneer.DotnetCore.UnitTests.csproj", "{7C9A3B9A-3613-4047-B402-7B6A598B12F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +33,30 @@ Global
 		{85E41A73-1F53-4911-87F0-000C156346EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85E41A73-1F53-4911-87F0-000C156346EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85E41A73-1F53-4911-87F0-000C156346EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07AD696A-A556-4E8E-A07F-248A5B3F40D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07AD696A-A556-4E8E-A07F-248A5B3F40D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07AD696A-A556-4E8E-A07F-248A5B3F40D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07AD696A-A556-4E8E-A07F-248A5B3F40D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{096774CD-99B2-489B-B6CA-D07A8271154E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{096774CD-99B2-489B-B6CA-D07A8271154E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{096774CD-99B2-489B-B6CA-D07A8271154E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{096774CD-99B2-489B-B6CA-D07A8271154E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C3AF107-6A8D-47F1-BFA0-D15CDCD16865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C3AF107-6A8D-47F1-BFA0-D15CDCD16865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C3AF107-6A8D-47F1-BFA0-D15CDCD16865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C3AF107-6A8D-47F1-BFA0-D15CDCD16865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D064064-AAD9-4553-A94E-77963C938988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D064064-AAD9-4553-A94E-77963C938988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D064064-AAD9-4553-A94E-77963C938988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D064064-AAD9-4553-A94E-77963C938988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C9171D-5472-447B-87B8-B5083FD9C466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C9171D-5472-447B-87B8-B5083FD9C466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C9171D-5472-447B-87B8-B5083FD9C466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C9171D-5472-447B-87B8-B5083FD9C466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C9A3B9A-3613-4047-B402-7B6A598B12F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C9A3B9A-3613-4047-B402-7B6A598B12F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C9A3B9A-3613-4047-B402-7B6A598B12F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C9A3B9A-3613-4047-B402-7B6A598B12F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
