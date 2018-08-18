@@ -20,6 +20,5 @@ namespace Payoneer.DotnetCore.Domain
         public string StatusDescription { get; set; }
         [MaxLength(250)]
         public string Reason { get; set; }
-
     }
 }
