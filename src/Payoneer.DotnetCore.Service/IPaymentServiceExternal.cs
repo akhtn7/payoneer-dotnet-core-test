@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Payoneer.DotnetCore.Domain;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Payoneer.DotnetCore.Domain;
 
-namespace Payoneer.DotnetCore.Service.Internal
+namespace Payoneer.DotnetCore.Service.External
 {
-    public interface IPaymentServiceInternal
+    public interface IPaymentServiceExternal
     {
         Task<IEnumerable<Payment>> GetPaymentsFiltered(IEnumerable<PaymentStatus> filter);
         Task<Payment> GetPaymentByIdAsync(int id);

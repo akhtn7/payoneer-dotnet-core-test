@@ -41,7 +41,7 @@ namespace Payoneer.DotnetCore.Service.Internal
             return payment;
         }
 
-        public async Task UpdatePaymentStatusAsync(PaymentChangeStatusRequest request)
+        public async Task<PaymentChangeStatusResponse> UpdatePaymentStatusAsync(PaymentChangeStatusRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
@@ -49,6 +49,9 @@ namespace Payoneer.DotnetCore.Service.Internal
 
             if (!response.IsSuccessStatusCode)
                 throw new InvalidOperationException($"Extrernal payment service return an error: '{response.StatusCode}'");
+
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PaymentChangeStatusResponse>(result);
         }
     }
 }

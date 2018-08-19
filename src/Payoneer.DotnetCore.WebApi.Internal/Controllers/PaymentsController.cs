@@ -44,8 +44,8 @@ namespace Payoneer.DotnetCore.WebApi.Internal.Controllers
         {
             if (request == null) return BadRequest();
 
-            await _paymentServiceInternal.UpdatePaymentStatusAsync(request);
-            return Ok();
+            var result = await _paymentServiceInternal.UpdatePaymentStatusAsync(request);
+            return Ok(result);
         }
     }
 }

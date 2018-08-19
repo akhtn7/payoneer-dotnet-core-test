@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Payoneer.DotnetCore.Service\Payoneer.DotnetCore.Service.csproj" />
+    <ProjectReference Include="..\Payoneer.DotnetCore.Service\Payoneer.DotnetCore.Service.External.csproj" />
   </ItemGroup>
 
 </Project>

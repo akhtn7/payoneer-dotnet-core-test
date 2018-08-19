@@ -1,21 +1,21 @@
-﻿using FakeItEasy;
-using FluentAssertions;
-using Payoneer.DotnetCore.Domain;
-using Payoneer.DotnetCore.Repository;
-using Payoneer.DotnetCore.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
+using FakeItEasy;
+using FluentAssertions;
+using Payoneer.DotnetCore.Domain;
+using Payoneer.DotnetCore.Repository;
+using Payoneer.DotnetCore.Service.External;
 using Xunit;
 
-namespace Payoneer.DotnetCore.UnitTests.Service
+namespace Payoneer.DotnetCore.UnitTests.Service.External
 {
-    public class PaymentServiceTests
+    public class PaymentServiceExternalTests
     {
         [Fact]
-        public void PaymentService_Ctor_should_not_throw_if_argument_is_valid()
+        public void PaymentServiceExternal_Ctor_should_not_throw_if_argument_is_valid()
         {
             //Act
             Action ctor = () => SubjectBuilder.New().Build();
@@ -26,19 +26,20 @@ namespace Payoneer.DotnetCore.UnitTests.Service
 
         [Theory]
         [MemberData(nameof(IncompleteMocksForCtor))]
-        public void PaymentService_Ctor_should_not_accept_a_not_initialized_parameter(
+        public void PaymentServiceExternal_Ctor_should_not_accept_a_not_initialized_parameter(
             IUnitOfWork unitOfWork,
-            IRepository<Payment> paymentRepository)
+            IRepository<Payment> paymentRepository,
+            IPaymentValidator paymentValidator)
         {
             // Act
-            Action ctor = () => new PaymentService(unitOfWork, paymentRepository);
+            Action ctor = () => new PaymentServiceExternal(unitOfWork, paymentRepository, paymentValidator);
 
             // Assert
             ctor.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
-        public void PaymentService_GetPaymentsFiltered_should_throw_if_argument_is_null()
+        public void PaymentServiceExternal_GetPaymentsFiltered_should_throw_if_argument_is_null()
         {
             //Arrange
             var subject = SubjectBuilder.New().Build();
@@ -51,7 +52,7 @@ namespace Payoneer.DotnetCore.UnitTests.Service
         }
 
         [Fact]
-        public void PaymentService_GetPaymentsFiltered_should_call_paymentRepository_GetAll()
+        public void PaymentServiceExternal_GetPaymentsFiltered_should_call_paymentRepository_GetAll()
         {
             //Arrange
             var builder = SubjectBuilder.New();
@@ -91,7 +92,7 @@ namespace Payoneer.DotnetCore.UnitTests.Service
         //}
 
         [Fact]
-        public void PaymentService_GetPaymentByIdAsync_should_throw_if_argument_is_invalid()
+        public void PaymentServiceExternal_GetPaymentByIdAsync_should_throw_if_argument_is_invalid()
         {
             //Arrange
             var subject = SubjectBuilder.New().Build();
@@ -104,7 +105,7 @@ namespace Payoneer.DotnetCore.UnitTests.Service
         }
 
         [Fact]
-        public void PaymentService_UpdatePaymentStatusAsync_should_throw_if_argument_is_null()
+        public void PaymentServiceExternal_UpdatePaymentStatusAsync_should_throw_if_argument_is_null()
         {
             //Arrange
             var subject = SubjectBuilder.New().Build();
@@ -118,8 +119,9 @@ namespace Payoneer.DotnetCore.UnitTests.Service
 
         public static IEnumerable<object[]> IncompleteMocksForCtor => new[]
         {
-            new object[] { null, A.Fake<IRepository<Payment>>() },
-            new object[] { A.Fake<IUnitOfWork>(), null }
+            new object[] { null, A.Fake<IRepository<Payment>>(), A.Fake<IPaymentValidator>() },
+            new object[] { A.Fake<IUnitOfWork>(), null, A.Fake<IPaymentValidator>() },
+            new object[] { A.Fake<IUnitOfWork>(), A.Fake<IRepository<Payment>>(), null }
         };
 
         public static IEnumerable<object[]> MocksForGetPaymentsFiltered => new[]
@@ -137,6 +139,7 @@ namespace Payoneer.DotnetCore.UnitTests.Service
         {
             public IUnitOfWork UnitOfWork { get; }
             public IRepository<Payment> PaymentRepository { get; }
+            public IPaymentValidator PaymentValidator { get; }
 
             public IEnumerable<Payment> Payments { get; }
 
@@ -144,6 +147,7 @@ namespace Payoneer.DotnetCore.UnitTests.Service
             {
                 UnitOfWork = A.Fake<IUnitOfWork>();
                 PaymentRepository = A.Fake<IRepository<Payment>>();
+                PaymentValidator = A.Fake<IPaymentValidator>();
                 Payments = (new Fixture()).CreateMany<Payment>(6).ToList();
             }
 
@@ -157,8 +161,8 @@ namespace Payoneer.DotnetCore.UnitTests.Service
                 return this;
             }
 
-            public IPaymentService Build() =>
-                new PaymentService(UnitOfWork, PaymentRepository);
+            public IPaymentServiceExternal Build() =>
+                new PaymentServiceExternal(UnitOfWork, PaymentRepository, PaymentValidator);
         }
     }
 }

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Payoneer.DotnetCore.Domain;
-using Payoneer.DotnetCore.Service;
+using Payoneer.DotnetCore.Service.External;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Payoneer.DotnetCore.WebApi.External.Controllers
 {
     [Route("api/[controller]")]
     public class PaymentsController : Controller
     {
-        private readonly IPaymentService _paymentService;
+        private readonly IPaymentServiceExternal _paymentService;
 
-        public PaymentsController(IPaymentService paymentService) =>
+        public PaymentsController(IPaymentServiceExternal paymentService) =>
             _paymentService = paymentService ?? throw new ArgumentNullException(nameof(paymentService));
 
         // GET api/payments?paymentStatus=0&paymentStatus=2
@@ -45,8 +44,8 @@ namespace Payoneer.DotnetCore.WebApi.External.Controllers
         {
             if (request == null) return BadRequest();
 
-            await _paymentService.UpdatePaymentStatusAsync(request);
-            return Ok();
+            var result = await _paymentService.UpdatePaymentStatusAsync(request);
+            return Ok(result);
         }
     }
 }

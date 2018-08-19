@@ -2,15 +2,15 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using System.IO.Compression;
-using Microsoft.EntityFrameworkCore;
 using Payoneer.DotnetCore.Domain;
 using Payoneer.DotnetCore.Rds;
 using Payoneer.DotnetCore.Repository;
-using Payoneer.DotnetCore.Service;
+using Payoneer.DotnetCore.Service.External;
+using System.IO.Compression;
 
 namespace Payoneer.DotnetCore.WebApi.External
 {
@@ -39,8 +39,9 @@ namespace Payoneer.DotnetCore.WebApi.External
             services.AddScoped<IDbFactory, DbFactory>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRepository<Payment>, Repository<Payment>>();
-            services.AddTransient<IPaymentService, PaymentService>();
-
+            services.AddTransient<IPaymentServiceExternal, PaymentServiceExternal>();
+            services.AddTransient<IPaymentValidator, PaymentValidator>();
+            
             services.AddCors();
 
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);

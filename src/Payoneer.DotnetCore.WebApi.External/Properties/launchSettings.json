@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/payments?paymentStatus=0&paymentStatus=1&paymentStatus=99",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
