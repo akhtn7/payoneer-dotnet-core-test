@@ -45,7 +45,7 @@ namespace Payoneer.DotnetCore.Service.Internal
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var response = await _restClient.PutAsync($"api/payment/{request.Id}", request);
+            var response = await _restClient.PutAsync($"api/payments/{request.Id}", request);
 
             if (!response.IsSuccessStatusCode)
                 throw new InvalidOperationException($"Extrernal payment service return an error: '{response.StatusCode}'");

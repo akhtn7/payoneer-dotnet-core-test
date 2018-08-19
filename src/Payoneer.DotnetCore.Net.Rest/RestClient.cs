@@ -43,19 +43,19 @@ namespace Payoneer.DotnetCore.Net.Rest
             if (relativeUrl == null) throw new ArgumentNullException(nameof(relativeUrl));
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            var request = CreatePostRequest(relativeUrl, value);
+            var request = CreatePutRequest(relativeUrl, value);
 
             return await SendAsync(request);
         }
 
-        private HttpRequestMessage CreatePostRequest(string relativeUrl, object value)
+        private HttpRequestMessage CreatePutRequest(string relativeUrl, object value)
         {
             var content = JsonConvert.SerializeObject(value);
 
             return new HttpRequestMessage
             {
                 Content = new StringContent(content, Encoding.UTF8, MimeType),
-                Method = HttpMethod.Post,
+                Method = HttpMethod.Put,
                 RequestUri = CreateUri(relativeUrl),
             };
         }
