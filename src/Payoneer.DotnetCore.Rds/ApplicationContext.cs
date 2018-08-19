@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Payoneer.DotnetCore.Domain;
+using Payoneer.DotnetCore.Domain.Models;
 using System;
 using System.Globalization;
 

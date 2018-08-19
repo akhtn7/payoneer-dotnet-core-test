@@ -6,6 +6,7 @@ using AutoFixture;
 using FakeItEasy;
 using FluentAssertions;
 using Payoneer.DotnetCore.Domain;
+using Payoneer.DotnetCore.Domain.Models;
 using Payoneer.DotnetCore.Repository;
 using Payoneer.DotnetCore.Service.External;
 using Xunit;
@@ -66,31 +67,6 @@ namespace Payoneer.DotnetCore.UnitTests.Service.External
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
-        //[Theory]
-        //[MemberData(nameof(MocksForGetPaymentsFiltered))]
-        //public async Task PaymentService_GetPaymentsFiltered_should_filter_Payments(
-        //    IList<PaymentStatus> filter)
-        //{
-        //    //Arrange
-        //    var builder = SubjectBuilder.New();
-        //    var subject = builder.Build();
-
-        //    var x = builder.Payments
-        //        .Where(p => filter.Contains(p.Status))
-        //        .OrderBy(p => p.Id);
-
-        //    //Act
-        //    var result = (await subject.GetPaymentsFiltered(filter)).OrderBy(p => p.Id).ToList();
-
-        //    //Assert
-        //    builder.Payments
-        //        .Where(p => filter.Contains(p.Status))
-        //        .OrderBy(p => p.Id)
-        //        .SequenceEqual(result)
-        //        .Should()
-        //        .BeTrue();
-        //}
-
         [Fact]
         public void PaymentServiceExternal_GetPaymentByIdAsync_should_throw_if_argument_is_invalid()
         {
@@ -124,17 +100,6 @@ namespace Payoneer.DotnetCore.UnitTests.Service.External
             new object[] { A.Fake<IUnitOfWork>(), A.Fake<IRepository<Payment>>(), null }
         };
 
-        public static IEnumerable<object[]> MocksForGetPaymentsFiltered => new[]
-        {
-            new object[] { new List<PaymentStatus> { PaymentStatus.Pending } },
-            new object[] { new List<PaymentStatus> { PaymentStatus.Approved } },
-            new object[] { new List<PaymentStatus> { PaymentStatus.Rejected } },
-            new object[] { new List<PaymentStatus> { PaymentStatus.Pending, PaymentStatus.Approved } },
-            new object[] { new List<PaymentStatus> { PaymentStatus.Pending, PaymentStatus.Rejected } },
-            new object[] { new List<PaymentStatus> { PaymentStatus.Approved, PaymentStatus.Rejected } },
-            new object[] { new List<PaymentStatus> { PaymentStatus.Pending, PaymentStatus.Approved, PaymentStatus.Rejected } }
-        };
-
         private class SubjectBuilder
         {
             public IUnitOfWork UnitOfWork { get; }
@@ -153,13 +118,6 @@ namespace Payoneer.DotnetCore.UnitTests.Service.External
 
             public static SubjectBuilder New() =>
                 new SubjectBuilder();
-
-            public SubjectBuilder WithPayments()
-            {
-                A.CallTo(() => PaymentRepository.GetAll()).Returns(Payments.AsQueryable());
-
-                return this;
-            }
 
             public IPaymentServiceExternal Build() =>
                 new PaymentServiceExternal(UnitOfWork, PaymentRepository, PaymentValidator);

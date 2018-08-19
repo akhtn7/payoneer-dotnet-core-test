@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Payoneer.DotnetCore.Domain.Models;
 
 namespace Payoneer.DotnetCore.Service.Internal
 {
@@ -26,6 +27,10 @@ namespace Payoneer.DotnetCore.Service.Internal
             if (query.Length > 0) url += "?" + query;
 
             var response = await _restClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new InvalidOperationException($"Extrernal payment service returned an error: '{response.StatusCode}'");
+
             var result = await response.Content.ReadAsStringAsync();
             var payments = JsonConvert.DeserializeObject<IEnumerable<Payment>>(result).ToList();
             return payments;
@@ -36,6 +41,10 @@ namespace Payoneer.DotnetCore.Service.Internal
             if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
 
             var response = await _restClient.GetAsync($"api/payments/{id}");
+
+            if (!response.IsSuccessStatusCode)
+                throw new InvalidOperationException($"Extrernal payment service returned an error: '{response.StatusCode}'");
+
             var result = await response.Content.ReadAsStringAsync();
             var payment = JsonConvert.DeserializeObject<Payment>(result);
             return payment;
@@ -48,7 +57,7 @@ namespace Payoneer.DotnetCore.Service.Internal
             var response = await _restClient.PutAsync($"api/payments/{request.Id}", request);
 
             if (!response.IsSuccessStatusCode)
-                throw new InvalidOperationException($"Extrernal payment service return an error: '{response.StatusCode}'");
+                throw new InvalidOperationException($"Extrernal payment service returned an error: '{response.StatusCode}'");
 
             var result = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PaymentChangeStatusResponse>(result);

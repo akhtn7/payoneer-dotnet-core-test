@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using Payoneer.DotnetCore.Domain;
+using Payoneer.DotnetCore.Domain.Models;
 using Payoneer.DotnetCore.Rds;
 using Payoneer.DotnetCore.Repository;
 using Payoneer.DotnetCore.Service.External;

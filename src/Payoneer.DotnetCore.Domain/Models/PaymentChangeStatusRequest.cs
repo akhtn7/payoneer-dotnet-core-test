@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Payoneer.DotnetCore.Domain
+﻿namespace Payoneer.DotnetCore.Domain.Models
 {
     public class PaymentChangeStatusRequest
     {

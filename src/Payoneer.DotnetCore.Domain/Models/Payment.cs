@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Payoneer.DotnetCore.Domain
+namespace Payoneer.DotnetCore.Domain.Models
 {
     public class Payment
     {

@@ -1,4 +1,4 @@
-﻿namespace Payoneer.DotnetCore.Domain
+﻿namespace Payoneer.DotnetCore.Domain.Models
 {
     public enum PaymentChangeStatusResult
     {

@@ -1,4 +1,5 @@
 ﻿using Payoneer.DotnetCore.Domain;
+using Payoneer.DotnetCore.Domain.Models;
 
 namespace Payoneer.DotnetCore.Service.External
 {

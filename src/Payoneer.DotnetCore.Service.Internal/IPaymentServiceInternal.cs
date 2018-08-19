@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Payoneer.DotnetCore.Domain;
+﻿using Payoneer.DotnetCore.Domain.Contracts;
 
 namespace Payoneer.DotnetCore.Service.Internal
 {
-    public interface IPaymentServiceInternal
+    public interface IPaymentServiceInternal : IPaymentService
     {
-        Task<IEnumerable<Payment>> GetPaymentsFiltered(IEnumerable<PaymentStatus> filter);
-        Task<Payment> GetPaymentByIdAsync(int id);
-        Task<PaymentChangeStatusResponse> UpdatePaymentStatusAsync(PaymentChangeStatusRequest request);
     }
 }

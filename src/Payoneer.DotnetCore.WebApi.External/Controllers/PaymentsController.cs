@@ -4,6 +4,7 @@ using Payoneer.DotnetCore.Service.External;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Payoneer.DotnetCore.Domain.Models;
 
 namespace Payoneer.DotnetCore.WebApi.External.Controllers
 {
